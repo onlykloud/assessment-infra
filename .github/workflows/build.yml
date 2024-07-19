@@ -22,6 +22,7 @@ env:
 jobs:
   terraform-build-devel:
     runs-on: ubuntu-latest
+    environment: devel
     if: github.ref == 'refs/heads/devel'
     steps:
       - uses: actions/checkout@v4
@@ -35,8 +36,12 @@ jobs:
       - run: terraform plan
         name: terraform plan
         working-directory: "devel"
+      - run: terraform apply --auto-approve
+        name: terraform apply
+        working-directory: "devel"
   terraform-build-stage:
     runs-on: ubuntu-latest
+    environment: stage
     if: github.ref == 'refs/heads/stage'
     steps:
       - uses: actions/checkout@v4
@@ -50,8 +55,12 @@ jobs:
       - run: terraform plan
         name: terraform plan
         working-directory: "stage"
+      - run: terraform apply --auto-approve
+        name: terraform apply
+        working-directory: "stage"
   terraform-build-prod:
     runs-on: ubuntu-latest
+    environment: prod
     if: github.ref == 'refs/heads/prod'
     steps:
       - uses: actions/checkout@v4
@@ -64,4 +73,7 @@ jobs:
         working-directory: "prod"
       - run: terraform plan
         name: terraform plan
+        working-directory: "prod"
+      - run: terraform apply --auto-approve
+        name: terraform apply
         working-directory: "prod"
