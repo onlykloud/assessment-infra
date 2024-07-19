@@ -22,6 +22,7 @@ env:
 jobs:
   terraform-build-devel:
     runs-on: ubuntu-latest
+    environment: devel
     if: github.ref == 'refs/heads/devel'
     steps:
       - uses: actions/checkout@v4
@@ -40,6 +41,7 @@ jobs:
         working-directory: "devel"
   terraform-build-stage:
     runs-on: ubuntu-latest
+    environment: stage
     if: github.ref == 'refs/heads/stage'
     steps:
       - uses: actions/checkout@v4
@@ -58,6 +60,7 @@ jobs:
         working-directory: "stage"
   terraform-build-prod:
     runs-on: ubuntu-latest
+    environment: prod
     if: github.ref == 'refs/heads/prod'
     steps:
       - uses: actions/checkout@v4
