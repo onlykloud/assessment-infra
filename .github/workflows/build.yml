@@ -35,6 +35,9 @@ jobs:
       - run: terraform plan
         name: terraform plan
         working-directory: "devel"
+      - run: terraform apply --auto-approve
+        name: terraform apply
+        working-directory: "devel"
   terraform-build-stage:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/stage'
@@ -50,6 +53,9 @@ jobs:
       - run: terraform plan
         name: terraform plan
         working-directory: "stage"
+      - run: terraform apply --auto-approve
+        name: terraform apply
+        working-directory: "stage"
   terraform-build-prod:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/prod'
@@ -64,4 +70,7 @@ jobs:
         working-directory: "prod"
       - run: terraform plan
         name: terraform plan
+        working-directory: "prod"
+      - run: terraform apply --auto-approve
+        name: terraform apply
         working-directory: "prod"
